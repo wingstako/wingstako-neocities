@@ -12,18 +12,18 @@ concurrency: # prevent concurrent deploys doing strange things
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  deploy-to-neocities:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2.5.0
     # Set up any tools and build steps here
     # This example uses a Node.js toolchain to build a site
-    - name: Use Node.js
+    - name: Setup Node.js
       uses: actions/setup-node@v3.5.1
       with:
         node-version: lts/*
-    - name: Install deps and build
+    - name: Install dependencies and run build script
       run: |
         npm i
         npm run build
@@ -31,6 +31,6 @@ jobs:
     - name: Deploy to neocities
       uses: bcomnes/deploy-to-neocities@v1
       with:
-        api_token: ${{ secrets.NEOCITIES_API_TOKEN }}
+        api_token: ${{ secrets.NEOCITIES_API_KEY }}
         cleanup: false
         dist_dir: build
