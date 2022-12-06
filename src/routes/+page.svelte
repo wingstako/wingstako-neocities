@@ -41,13 +41,14 @@
 			commandProcessor.process(command);
 
 			command = '';
+
+			inputField.focus();
 		}
 
-        // onMount(() => {
-        //     commandProcessor.process("wingstako")
-        // });
+		// onMount(() => {
+		//     commandProcessor.process("wingstako")
+		// });
 	};
-
 </script>
 
 <div class="main-container" on:click={onClick}>
@@ -97,7 +98,7 @@
 		overflow-y: scroll;
 		/* margin-top: 10vh;
 		margin-bottom: 10vh; */
-		height: 80vh;
+		height: 100vh;
 		/* background-color: black; */
 		padding-top: 20px;
 		padding-bottom: 10px;
