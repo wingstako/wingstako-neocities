@@ -44,11 +44,20 @@
 
 			inputField.focus();
 		}
-
-		// onMount(() => {
-		//     commandProcessor.process("wingstako")
-		// });
 	};
+
+	onMount(() => {
+		const init_msg: TERMINAL.TerminalMessage = {
+			message: `
+    Welcome traveler, <br>
+    Please enter "help" to check available commands.
+    
+    `,
+			html: true
+		};
+
+		displayStore.update((value) => value.concat(init_msg));
+	});
 </script>
 
 <div class="main-container" on:click={onClick}>
