@@ -10,6 +10,7 @@ declare namespace App {
 
 declare namespace TERMINAL {
 	type TerminalMessage = {
+		id: string;
 		message: string;
 		html?: boolean | undefined;
 		color?: string | undefined;

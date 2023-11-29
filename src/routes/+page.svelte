@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { currentLineStore } from '$lib/stores/terminal-store';
-	import { CommandProcessor } from '$lib/commands/processor';
+	import { CommandProcessor } from '$lib/processor';
 	import { displayStore, commandHistoryStore } from '$lib/stores/terminal-store';
 	import { onMount } from 'svelte';
+	import { createTerminalMessage } from '$lib/uitls';
 
 	let commandPrefix = 'guest@wingstako.terminal % ';
 
@@ -12,9 +13,11 @@
 
 	let inputField: HTMLInputElement;
 
+	let outerContainer: HTMLDivElement, innerContainer: HTMLDivElement;
+
 	const commandProcessor = CommandProcessor.getIntance();
 
-	const onClick = (e: MouseEvent) => {
+	const onClick = (_e: MouseEvent) => {
 		inputField.focus();
 	};
 
@@ -30,9 +33,9 @@
 			}
 			command = $commandHistoryStore[commandHistoryIndex];
 		} else if (e.key === 'Enter') {
-			const enteredCommand: TERMINAL.TerminalMessage = {
+			const enteredCommand: TERMINAL.TerminalMessage = createTerminalMessage({
 				message: commandPrefix + command
-			};
+			});
 
 			displayStore.update((value) => value.concat(enteredCommand));
 			commandHistoryStore.update((value) => value.concat(command));
@@ -46,24 +49,33 @@
 		}
 	};
 
+	function scrollToBottom() {
+		setTimeout(() => {
+			if (innerContainer) {
+				innerContainer.scrollTop = innerContainer.scrollHeight;
+			}
+		}, 10);
+	}
+
+	$: $displayStore, scrollToBottom();
+
 	onMount(() => {
-		const init_msg: TERMINAL.TerminalMessage = {
+		const init_msg: TERMINAL.TerminalMessage = createTerminalMessage({
 			message: `
     Welcome traveler, <br>
     Please enter "help" to check available commands.
-    
     `,
 			html: true
-		};
+		});
 
 		displayStore.update((value) => value.concat(init_msg));
 	});
 </script>
 
-<div class="main-container" on:click={onClick}>
-	<div class="terminal-container">
+<div class="main-container" on:click={onClick} bind:this={outerContainer}>
+	<div class="terminal-container" bind:this={innerContainer}>
 		<div>
-			{#each $displayStore as value}
+			{#each $displayStore as value (value.id)}
 				{#if value.html}
 					{@html value.message}
 				{:else}
@@ -101,6 +113,7 @@
 		height: 100vh;
 		width: 100vw;
 		background-color: rgb(36, 29, 29);
+		overflow-y: auto;
 	}
 
 	.terminal-container {
@@ -112,5 +125,6 @@
 		padding-top: 20px;
 		padding-bottom: 10px;
 		padding-left: 40px;
+		overflow-y: auto;
 	}
 </style>
