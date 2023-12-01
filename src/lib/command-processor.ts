@@ -8,6 +8,7 @@ import type { ICommand } from './types/command.interface';
 import { EchoCommand } from './commands/echo';
 import { CdCommand } from './commands/cd';
 import { CurlCommand } from './commands/curl';
+import { LsCommand } from './commands/ls';
 
 
 const COMMAND_REGISTRY: {[command: string]: ICommand} = {
@@ -18,6 +19,7 @@ const COMMAND_REGISTRY: {[command: string]: ICommand} = {
 	'echo': new EchoCommand(),
 	'cd': new CdCommand(),
 	'curl': new CurlCommand(),
+	'ls': new LsCommand(),
 };
 
 export class CommandProcessor {

@@ -4,13 +4,6 @@ import type { ICommand } from '../types/command.interface';
 
 export class CurlCommand implements ICommand {
 	execute(args: string[]): void {
-
-        // transform blob into ascii arts
-        // https://www.npmjs.com/package/ascii-art
-        // https://www.npmjs.com/package/ascii-art-image
-        // https://www.npmjs.com/package/ascii-art-to-image
-
-
         if (args[0].endsWith('.png') || args[0].endsWith('.jpg')) {
             const message = createTerminalMessage({
                 message: `<img src="${args[0]}" alt="${args[0]}">`,
@@ -20,10 +13,31 @@ export class CurlCommand implements ICommand {
             return;
         }
 
-
         // use fetch to mimic curl
         fetch(args[0]).then((response) => {
-            return response.text();
+
+            // check response type
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            // check response type
+            const contentType = response.headers.get('content-type');
+
+            // Switch statement to check against multiple possible values
+            switch (contentType) {
+                case 'application/json':
+                    return response.json();
+                case 'text/html':
+                    return response.text();
+                default:
+                    throw new Error(`Sorry, content-type ${contentType} not supported`);
+            }
+
+
+
+
+
         }).then((text) => {
             const message = createTerminalMessage({
                 message: text,
@@ -38,11 +52,5 @@ export class CurlCommand implements ICommand {
             });
             displayStore.update((display) => display.concat(message));
         });
-
-		// const message = createTerminalMessage({
-		// 	message: args.join(' '),
-		// });
-
-		// displayStore.update((display) => display.concat(message));
 	}
 }

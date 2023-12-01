@@ -152,6 +152,8 @@
 		padding-top: 20px;
 		padding-bottom: 10px;
 		padding-left: 40px;
+		padding-right: 40px;
 		overflow-y: auto;
+		word-break: break-all;
 	}
 </style>

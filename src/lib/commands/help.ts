@@ -11,6 +11,7 @@ export class HelpCommand implements ICommand {
 			{name: 'bocchi', desription: ''},
 			{name: 'echo', desription: ''},
 			{name: 'cd', desription: '[dir]'},
+			{name: 'curl', desription: '[url]'},
 		];
 
 		//sort by name alphabetically
