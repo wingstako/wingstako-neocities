@@ -1,27 +1,24 @@
 <script lang="ts">
 	import { currentLineStore } from '$lib/stores/terminal-store';
-	import { CommandProcessor } from '$lib/processor';
-	import { displayStore, commandHistoryStore } from '$lib/stores/terminal-store';
+	import { CommandProcessor } from '$lib/command-processor';
+	import { displayStore, commandHistoryStore, directoryStore } from '$lib/stores/terminal-store';
 	import { onMount } from 'svelte';
 	import { createTerminalMessage } from '$lib/uitls';
 
-	let commandPrefix = 'guest@wingstako.terminal % ';
+	let commandPrefix = 'guest@wingstako.terminal ';
 
 	let commandHistoryIndex = $commandHistoryStore.length - 1;
 
 	let command = '';
 
-	let inputField: HTMLInputElement;
+	let inputField: HTMLTextAreaElement;
 
-	let outerContainer: HTMLDivElement, innerContainer: HTMLDivElement;
+	let innerContainer: HTMLDivElement;
 
-	const commandProcessor = CommandProcessor.getIntance();
-
-	const onClick = (_e: MouseEvent) => {
-		inputField.focus();
-	};
+	const commandProcessor = CommandProcessor.getInstance();
 
 	const onKeyDown = (e: KeyboardEvent) => {
+		inputField.focus();
 		if (e.key === 'ArrowUp') {
 			command = $commandHistoryStore[commandHistoryIndex];
 			if (commandHistoryIndex > 0) {
@@ -33,18 +30,20 @@
 			}
 			command = $commandHistoryStore[commandHistoryIndex];
 		} else if (e.key === 'Enter') {
+			e.preventDefault();
 			const enteredCommand: TERMINAL.TerminalMessage = createTerminalMessage({
-				message: commandPrefix + command
+				message: `<p>
+					<span style="color:#00FF00;">${commandPrefix}</span>
+					<span style="color:#FFFF00;">${displayedDirectory}</span> 
+					<br><span>${command}</span>
+					</p>`,
+				html: true
 			});
-
 			displayStore.update((value) => value.concat(enteredCommand));
 			commandHistoryStore.update((value) => value.concat(command));
 			commandHistoryIndex = $commandHistoryStore.length - 1;
-
 			commandProcessor.process(command);
-
 			command = '';
-
 			inputField.focus();
 		}
 	};
@@ -57,9 +56,19 @@
 		}, 10);
 	}
 
+	function adjustHeight() {
+		inputField.style.height = 'auto';
+		inputField.style.height = inputField.scrollHeight + 'px';
+	}
+
 	$: $displayStore, scrollToBottom();
 
+	$: displayedDirectory = $directoryStore.length > 0 ? '~/' + $directoryStore.join('/') : '~';
+
+	$: if (inputField) adjustHeight();
+
 	onMount(() => {
+		adjustHeight;
 		const init_msg: TERMINAL.TerminalMessage = createTerminalMessage({
 			message: `
     Welcome traveler, <br>
@@ -69,10 +78,21 @@
 		});
 
 		displayStore.update((value) => value.concat(init_msg));
+
+		const handleGlobalKeydown = (e: KeyboardEvent) => {
+			inputField.focus();
+		};
+		window.addEventListener('keydown', handleGlobalKeydown);
+
+		return () => {
+			window.removeEventListener('keydown', handleGlobalKeydown);
+		};
 	});
 </script>
 
-<div class="main-container" on:click={onClick} bind:this={outerContainer}>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div class="main-container">
 	<div class="terminal-container" bind:this={innerContainer}>
 		<div>
 			{#each $displayStore as value (value.id)}
@@ -87,13 +107,16 @@
 				<div>{$currentLineStore}</div>
 			{:else}
 				<div>
-					{commandPrefix}<input
-						type="text"
-						autofocus
-						bind:value={command}
-						on:keydown={onKeyDown}
-						bind:this={inputField}
-					/>
+					<span style="color:#00FF00;">{commandPrefix}</span>
+					<span style="color:#FFFF00;">{displayedDirectory}</span>
+					<div class="textarea-container">
+						<textarea
+							bind:value={command}
+							on:input={adjustHeight}
+							on:keydown={onKeyDown}
+							bind:this={inputField}
+						/>
+					</div>
 				</div>
 			{/if}
 		</div>
@@ -101,11 +124,15 @@
 </div>
 
 <style>
-	input[type='text'] {
+	textarea {
 		background-color: transparent;
 		border: 0;
 		border-width: 0;
 		outline: none;
+		width: 95vw;
+		resize: none;
+		overflow-y: auto;
+		height: auto;
 	}
 
 	.main-container {

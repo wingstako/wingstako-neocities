@@ -1,8 +1,8 @@
 import { displayStore } from '$lib/stores/terminal-store';
-import type { ICommand } from './command';
+import type { ICommand } from '../types/command.interface';
 
 export class ClearCommand implements ICommand {
-	execute(args: string[]): void {
+	execute(): void {
 		displayStore.set([]);
 	}
 }
