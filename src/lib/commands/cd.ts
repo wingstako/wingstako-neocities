@@ -15,32 +15,29 @@ export class CdCommand implements ICommand {
 
 		const cdPath = args[0].split('/');
 
-		console.log(cdPath)
-		cdPath.forEach((path) => {
+		// remove all empty string in cdPath
+		for (let i = cdPath.length - 1; i >= 0; i--) {
+			if (cdPath[i] === '') {
+				cdPath.splice(i, 1);
+			}
+		}
+
+		for (const path of cdPath) {
 			const currentPath = get(directoryStore);
 			if (path === '..') {
 				currentPath.pop();
 			} else {
-
 				const folderNode = DirectoryService.getFolder(path);
-
 				if (folderNode === null || folderNode === undefined) {
 					const message = createTerminalMessage({
 						message: `cd: ${args[0]}: No such directory`,
 					});
 					displayStore.update((display) => display.concat(message));
-					throw new Error('No such directory');
+					return;
 				}
-
 				currentPath.push(path);
-				console.log(currentPath)
 			}
 			directoryStore.update(() => currentPath);
-		});
-
-
-		console.log(get(directoryStore));
-
-        // directoryStore.update((directoryStore) => directoryStore.concat(args[0]));
+		};
 	}
 }

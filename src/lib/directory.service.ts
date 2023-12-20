@@ -2,6 +2,9 @@ import { directoryStore } from "./stores/terminal-store";
 import { get } from "svelte/store";
 import type { FolderNode, FileNode } from "./types/directory.interface";
 import { WorldlineFile } from "./files/jobs-worldline.file";
+import { ACUFile } from "./files/jobs-acu.file";
+import { HKJCFile } from "./files/jobs-hkjc.file";
+import { TnTSupermarketFile } from "./files/jobs-tnt.file";
 
 const directoryTree: FolderNode = {
     name: '~',
@@ -10,22 +13,17 @@ const directoryTree: FolderNode = {
         {
             name: 'jobs',
             type: 'folder',
-            children: [],
+            children: [
+                { name: 'worldline.txt', type: 'file', fileType: 'text', file: new WorldlineFile() },
+                { name: 'acu.txt', type: 'file', fileType: 'text', file: new ACUFile() },
+                { name: 'hkjc.txt', type: 'file', fileType: 'text', file: new HKJCFile() },
+                { name: 'tnt-supermarket.txt', type: 'file', fileType: 'text', file: new TnTSupermarketFile() },
+            ],
         },
         {
             name: 'logs',
             type: 'folder',
-            children: [
-                { name: 'file1.txt', type: 'file', fileType: 'text', file: new WorldlineFile()},
-                { name: 'file2.txt', type: 'file', fileType: 'text', file: { content: 'Hello World' }},
-                {
-                    name: 'subfolder',
-                    type: 'folder',
-                    children: [
-                        { name: 'subfile.txt', type: 'file', fileType: 'text', file: { content: 'Hello World' }},
-                    ]
-                }
-            ]
+            children: []
         }
     ]
 };
@@ -39,17 +37,18 @@ export class DirectoryService {
             if (directory === undefined) {
                 return [];
             }
-
             // @ts-expect-error filenode does not have children
             currentDirectory = directory;
         }
+        // return currentDirectory.children with sorted with name
+        currentDirectory.children.sort((a, b) => a.name.localeCompare(b.name));
         return currentDirectory.children;
     }
 
 
     public static getFile(filepath: string): FileNode | null {
         // current directory
-        const currentDirectory = get(directoryStore);
+        const currentDirectory = [...get(directoryStore)];
         filepath.split('/').forEach(ele => currentDirectory.push(ele))
         const pathArray = (currentDirectory).filter((path) => path !== '');
         const filename = pathArray.pop();
@@ -69,7 +68,7 @@ export class DirectoryService {
     public static getFolder(filepath: string): FolderNode | null {
 
         // current directory
-        const currentDirectory = get(directoryStore);
+        const currentDirectory = [...get(directoryStore)];
         filepath.split('/').forEach(ele => currentDirectory.push(ele))
         const pathArray = (currentDirectory).filter((path) => path !== '');
         const filename = pathArray.pop();
@@ -84,7 +83,6 @@ export class DirectoryService {
         }
 
         return file;
-        
     }
 
 }
