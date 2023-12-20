@@ -1,13 +1,7 @@
-interface FileNode {
-    name: string;
-    type: 'file';
-}
-
-interface FolderNode {
-    name: string;
-    type: 'folder';
-    children: Array<FileNode | FolderNode>;
-}
+import { directoryStore } from "./stores/terminal-store";
+import { get } from "svelte/store";
+import type { FolderNode, FileNode } from "./types/directory.interface";
+import { WorldlineFile } from "./files/jobs-worldline.file";
 
 const directoryTree: FolderNode = {
     name: '~',
@@ -22,13 +16,13 @@ const directoryTree: FolderNode = {
             name: 'logs',
             type: 'folder',
             children: [
-                { name: 'file1.txt', type: 'file' },
-                { name: 'file2.txt', type: 'file' },
+                { name: 'file1.txt', type: 'file', fileType: 'text', file: new WorldlineFile()},
+                { name: 'file2.txt', type: 'file', fileType: 'text', file: { content: 'Hello World' }},
                 {
                     name: 'subfolder',
                     type: 'folder',
                     children: [
-                        { name: 'subfile.txt', type: 'file' }
+                        { name: 'subfile.txt', type: 'file', fileType: 'text', file: { content: 'Hello World' }},
                     ]
                 }
             ]
@@ -52,8 +46,12 @@ export class DirectoryService {
         return currentDirectory.children;
     }
 
+
     public static getFile(filepath: string): FileNode | null {
-        const pathArray = filepath.split('/').filter((path) => path !== '');
+        // current directory
+        const currentDirectory = get(directoryStore);
+        filepath.split('/').forEach(ele => currentDirectory.push(ele))
+        const pathArray = (currentDirectory).filter((path) => path !== '');
         const filename = pathArray.pop();
         if (filename === undefined) {
             return null;
@@ -67,4 +65,26 @@ export class DirectoryService {
 
         return file;
     }
+
+    public static getFolder(filepath: string): FolderNode | null {
+
+        // current directory
+        const currentDirectory = get(directoryStore);
+        filepath.split('/').forEach(ele => currentDirectory.push(ele))
+        const pathArray = (currentDirectory).filter((path) => path !== '');
+        const filename = pathArray.pop();
+        if (filename === undefined) {
+            return null;
+        }
+
+        const directory = this.getFoldersAndFiles(pathArray.join('/'));
+        const file = directory.find((child) => child.name === filename);
+        if (file === undefined || file.type === 'file') {
+            return null;
+        }
+
+        return file;
+        
+    }
+
 }

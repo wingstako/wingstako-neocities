@@ -35,7 +35,7 @@
 				message: `<p>
 					<span style="color:#00FF00;">${commandPrefix}</span>
 					<span style="color:#FFFF00;">${displayedDirectory}</span> 
-					<br><span>${command}</span>
+					<br>$ <span>${command}</span>
 					</p>`,
 				html: true
 			});
@@ -45,6 +45,8 @@
 			commandProcessor.process(command);
 			command = '';
 			inputField.focus();
+		} else if (e.key === 'Tab') {
+			e.preventDefault();
 		}
 	};
 
@@ -68,7 +70,7 @@
 	$: if (inputField) adjustHeight();
 
 	onMount(() => {
-		adjustHeight;
+		adjustHeight();
 		const init_msg: TERMINAL.TerminalMessage = createTerminalMessage({
 			message: `
     Welcome traveler, <br>
@@ -129,7 +131,7 @@
 		border: 0;
 		border-width: 0;
 		outline: none;
-		width: 95vw;
+		width: 90vw;
 		resize: none;
 		overflow-y: auto;
 		height: auto;

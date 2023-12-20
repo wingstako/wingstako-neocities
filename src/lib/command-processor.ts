@@ -9,6 +9,7 @@ import { EchoCommand } from './commands/echo';
 import { CdCommand } from './commands/cd';
 import { CurlCommand } from './commands/curl';
 import { LsCommand } from './commands/ls';
+import { CatCommand } from './commands/cat';
 
 
 const COMMAND_REGISTRY: {[command: string]: ICommand} = {
@@ -20,6 +21,7 @@ const COMMAND_REGISTRY: {[command: string]: ICommand} = {
 	'cd': new CdCommand(),
 	'curl': new CurlCommand(),
 	'ls': new LsCommand(),
+	'cat': new CatCommand(),
 };
 
 export class CommandProcessor {

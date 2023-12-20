@@ -4,14 +4,14 @@ import type { ICommand } from '../types/command.interface';
 
 export class HelpCommand implements ICommand {
 	execute(): void {
-		const availableCommand: {name:string, desription:string}[] = [
-			{name: 'help', desription: ''},
-			{name: 'clear', desription: ''},
-			{name: 'wingstako', desription: ''},
-			{name: 'bocchi', desription: ''},
-			{name: 'echo', desription: ''},
-			{name: 'cd', desription: '[dir]'},
-			{name: 'curl', desription: '[url]'},
+		const availableCommand: { name: string, desription: string }[] = [
+			{ name: 'help', desription: '' },
+			{ name: 'clear', desription: '' },
+			{ name: 'wingstako', desription: '' },
+			//{name: 'bocchi', desription: ''},
+			{ name: 'echo', desription: '' },
+			{ name: 'cd', desription: '[dir]' },
+			{ name: 'curl', desription: '[url]' },
 		];
 
 		//sort by name alphabetically
