@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CommandProcessor } from '$lib/command-processor';
-	import { displayStore, commandHistoryStore, directoryStore } from '$lib/stores/terminal-store';
+	import { displayStore, commandHistoryStore, directoryStore, runningCommandStore } from '$lib/stores/terminal-store';
 	import { onMount } from 'svelte';
 	import { createTerminalMessage } from '$lib/uitls';
 
@@ -104,18 +104,20 @@
 				{/if}
 			{/each}
 
-			<div>
-				<span style="color:#00FF00;">{commandPrefix}</span>
-				<span style="color:#FFFF00;">{displayedDirectory}</span>
-				<div class="textarea-container">
-					<textarea
-						bind:value={command}
-						on:input={adjustHeight}
-						on:keydown={onKeyDown}
-						bind:this={inputField}
-					/>
+			{#if $runningCommandStore === null}
+				<div>
+					<span style="color:#00FF00;">{commandPrefix}</span>
+					<span style="color:#FFFF00;">{displayedDirectory}</span>
+					<div class="textarea-container">
+						<textarea
+							bind:value={command}
+							on:input={adjustHeight}
+							on:keydown={onKeyDown}
+							bind:this={inputField}
+						/>
+					</div>
 				</div>
-			</div>
+			{/if}
 		</div>
 	</div>
 </div>
