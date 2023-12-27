@@ -3,7 +3,6 @@ import type { IFile } from "$lib/types/directory.interface";
 export class ACUFile implements IFile {
     content: string = `
     <pre>                                                                                
-
 title: Software Developer
 company: ACU Holdings Limited
 location: Hong Kong

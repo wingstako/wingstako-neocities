@@ -12,6 +12,9 @@ export class HelpCommand implements ICommand {
 			{ name: 'echo', desription: '' },
 			{ name: 'cd', desription: '[dir]' },
 			{ name: 'curl', desription: '[url]' },
+			{ name: 'cat', desription: '[file]'},
+			{ name: 'ping', desription: '[domain]'},
+			{ name: 'ls', desription: '' },
 		];
 
 		//sort by name alphabetically
@@ -30,5 +33,6 @@ export class HelpCommand implements ICommand {
 		});
 
 		displayStore.update((display) => display.concat(message));
+		
 	}
 }

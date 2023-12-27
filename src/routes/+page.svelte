@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { currentLineStore } from '$lib/stores/terminal-store';
 	import { CommandProcessor } from '$lib/command-processor';
 	import { displayStore, commandHistoryStore, directoryStore } from '$lib/stores/terminal-store';
 	import { onMount } from 'svelte';
@@ -105,22 +104,18 @@
 				{/if}
 			{/each}
 
-			{#if $currentLineStore && $currentLineStore != ''}
-				<div>{$currentLineStore}</div>
-			{:else}
-				<div>
-					<span style="color:#00FF00;">{commandPrefix}</span>
-					<span style="color:#FFFF00;">{displayedDirectory}</span>
-					<div class="textarea-container">
-						<textarea
-							bind:value={command}
-							on:input={adjustHeight}
-							on:keydown={onKeyDown}
-							bind:this={inputField}
-						/>
-					</div>
+			<div>
+				<span style="color:#00FF00;">{commandPrefix}</span>
+				<span style="color:#FFFF00;">{displayedDirectory}</span>
+				<div class="textarea-container">
+					<textarea
+						bind:value={command}
+						on:input={adjustHeight}
+						on:keydown={onKeyDown}
+						bind:this={inputField}
+					/>
 				</div>
-			{/if}
+			</div>
 		</div>
 	</div>
 </div>

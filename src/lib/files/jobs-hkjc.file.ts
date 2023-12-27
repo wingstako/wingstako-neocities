@@ -3,7 +3,6 @@ import type { IFile } from "$lib/types/directory.interface";
 export class HKJCFile implements IFile {
     content: string = `
     <pre>                                                                                
-
 title: Trainee
 company: Hong Kong Jockey Club
 location: Hong Kong
