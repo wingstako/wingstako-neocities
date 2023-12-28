@@ -35,7 +35,9 @@ export class PingCommand implements IAsyncCommand {
         for (let i = 0; i < 4; i++) {
             try {
                 const start = new Date().getTime();
-                await fetch(`http://${ip}`, { mode: 'no-cors' });
+                // most of the time, the request will be upgraded to HTTPS
+                await fetch(`https://${url}`, { mode: 'no-cors' });
+                // await fetch(`http://${ip}`, { mode: 'no-cors' });
                 const end = new Date().getTime();
                 const ms = end - start;
 
