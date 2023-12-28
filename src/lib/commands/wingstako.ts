@@ -15,7 +15,7 @@ export class WingstakoCommand implements ICommand {
 ╚███╔███╔╝██║██║ ╚████║╚██████╔╝███████║   ██║   ██║  ██║██║  ██╗╚██████╔╝
  ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝
 
-This site is still under construction. I am thinking of a way to deal with interactive command.
+Feel free to propose new commands.
 <a style="background: linear-gradient(217deg, #e66465, rgba(255, 0, 0, 0) 70.71%)" href="https://github.com/wingstako/wingstako-neocities" target="blank">      
 GitHub Repository: https://github.com/wingstsako/wingstako-neocities</a>
             </pre>
