@@ -10,10 +10,13 @@ const config = {
 			postcss: true
 		}),
 	],
-
 	kit: {
-		adapter: adapterStatic({pages: 'build', assets: 'build', fallback: 'index.html'})
-	}
+		files: {
+			serviceWorker: 'src/service-worker.js'
+		},
+		adapter: adapterStatic({ pages: 'build', assets: 'build', fallback: 'index.html' })
+	},
+	vitePlugin: []
 };
 
 export default config;
