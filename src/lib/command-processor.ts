@@ -1,17 +1,9 @@
 import { displayStore, interactiveCommandStore, runningCommandStore } from '$lib/stores/terminal-store';
-import { BocchiCommand } from './commands/bocchi';
-import { ClearCommand } from './commands/clear';
 import { handle } from './error-handler';
 import { HelpCommand } from './commands/help';
-import { WingstakoCommand } from './commands/wingstako';
 import type { IAsyncCommand, ICommand, IInteractiveCommand } from './types/command.interface';
-import { EchoCommand } from './commands/echo';
-import { CdCommand } from './commands/cd';
-import { CurlCommand } from './commands/curl';
-import { LsCommand } from './commands/ls';
-import { CatCommand } from './commands/cat';
 import { get } from 'svelte/store';
-import { PingCommand } from './commands/ping';
+import { BocchiCommand, CatCommand, CdCommand, ClearCommand, CurlCommand, EchoCommand, LsCommand, PingCommand, WingstakoCommand } from './commands';
 
 const COMMAND_REGISTRY: { [command: string]: ICommand | IAsyncCommand | IInteractiveCommand } = {
 	'help': new HelpCommand(),
@@ -57,7 +49,7 @@ export class CommandProcessor {
 			displayStore.update((display) => display.concat(handle(input)));
 			return;
 		}
-		
+
 		runningCommandStore.set(command);
 
 		await command.execute(args);

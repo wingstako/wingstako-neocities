@@ -1,7 +1,7 @@
 import { DirectoryService } from '$lib/directory.service';
 import { displayStore, directoryStore } from '$lib/stores/terminal-store';
 import { createTerminalMessage } from '$lib/uitls';
-import type { ICommand } from '../types/command.interface';
+import type { ICommand } from '../../types/command.interface';
 import { get } from 'svelte/store';
 
 export class LsCommand implements ICommand {

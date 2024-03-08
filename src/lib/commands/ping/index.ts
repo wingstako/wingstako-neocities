@@ -1,6 +1,6 @@
 import { displayStore } from '$lib/stores/terminal-store';
 import { createTerminalMessage } from '$lib/uitls';
-import type { IAsyncCommand } from '../types/command.interface';
+import type { IAsyncCommand } from '../../types/command.interface';
 
 export class PingCommand implements IAsyncCommand {
 
