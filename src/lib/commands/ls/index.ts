@@ -15,7 +15,7 @@ export class LsCommand implements ICommand {
         directory.sort((a, b) => a.name.localeCompare(b.name));
 
         const output = directory.map((item) =>
-            item.type === 'folder'
+            item.type === 'directory'
                 ? `<span style="color:lightblue">${item.name}/</span>`
                 : `<span style="color:lightgreen">${item.name}</span>`)
             .join('&nbsp;&nbsp;&nbsp;&nbsp;');

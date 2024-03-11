@@ -1,6 +1,7 @@
-import type { IFile } from "$lib/types/directory.interface";
-
-export class WorldlineFile implements IFile {
+/**
+ * @deprecated
+ */
+export class WorldlineFile {
     content: string = `
     <pre>                                                                                
                      ////                                           
