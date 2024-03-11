@@ -1,6 +1,7 @@
-import type { IFile } from "$lib/types/directory.interface";
-
-export class HKJCFile implements IFile {
+/**
+ * @deprecated
+ */
+export class HKJCFile {
     content: string = `
     <pre>                                                                                
 title: Trainee

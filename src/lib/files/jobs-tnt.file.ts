@@ -1,6 +1,7 @@
-import type { IFile } from "$lib/types/directory.interface";
-
-export class TnTSupermarketFile implements IFile {
+/**
+ * @deprecated
+ */
+export class TnTSupermarketFile {
     content: string = `
     <pre>                                                                                                                                                        
 *+++++++++++++++++++++++        *++++++++        ++++++++++++++++++++++++   

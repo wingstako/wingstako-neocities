@@ -1,0 +1,59 @@
+{
+  "path": "static/directory",
+  "name": "directory",
+  "children": [
+    {
+      "path": "static\\directory\\b.txt",
+      "name": "b.txt",
+      "type": "file",
+      "extension": ".txt",
+      "mode": 33206,
+      "mtime": "2024-03-11T21:03:29.019Z"
+    },
+    {
+      "path": "static\\directory\\jobs",
+      "name": "jobs",
+      "children": [
+        {
+          "path": "static\\directory\\jobs\\a.txt",
+          "name": "a.txt",
+          "type": "file",
+          "extension": ".txt",
+          "mode": 33206,
+          "mtime": "2024-03-11T20:37:50.712Z"
+        },
+        {
+          "path": "static\\directory\\jobs\\c.txt",
+          "name": "c.txt",
+          "type": "file",
+          "extension": ".txt",
+          "mode": 33206,
+          "mtime": "2024-03-11T20:55:34.375Z"
+        },
+        {
+          "path": "static\\directory\\jobs\\subfolder",
+          "name": "subfolder",
+          "children": [
+            {
+              "path": "static\\directory\\jobs\\subfolder\\wow.txt",
+              "name": "wow.txt",
+              "type": "file",
+              "extension": ".txt",
+              "mode": 33206,
+              "mtime": "2024-03-11T23:01:09.857Z"
+            }
+          ],
+          "type": "directory",
+          "mode": 16822,
+          "mtime": "2024-03-11T23:01:09.857Z"
+        }
+      ],
+      "type": "directory",
+      "mode": 16822,
+      "mtime": "2024-03-11T23:01:05.339Z"
+    }
+  ],
+  "type": "directory",
+  "mode": 16822,
+  "mtime": "2024-03-11T20:37:56.656Z"
+}

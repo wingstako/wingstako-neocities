@@ -11,9 +11,6 @@ const config = {
 		}),
 	],
 	kit: {
-		files: {
-			serviceWorker: 'src/service-worker.js'
-		},
 		adapter: adapterStatic({ pages: 'build', assets: 'build', fallback: 'index.html' })
 	},
 	vitePlugin: []

@@ -1,34 +1,38 @@
 import { directoryStore } from "./stores/terminal-store";
 import { get } from "svelte/store";
 import type { FolderNode, FileNode } from "./types/directory.interface";
-import { WorldlineFile } from "./files/jobs-worldline.file";
-import { ACUFile } from "./files/jobs-acu.file";
-import { HKJCFile } from "./files/jobs-hkjc.file";
-import { TnTSupermarketFile } from "./files/jobs-tnt.file";
 
-const directoryTree: FolderNode = {
-    name: '~',
-    type: 'folder',
-    children: [
-        {
-            name: 'jobs',
-            type: 'folder',
-            children: [
-                { name: 'worldline.txt', type: 'file', fileType: 'text', file: new WorldlineFile() },
-                { name: 'acu.txt', type: 'file', fileType: 'text', file: new ACUFile() },
-                { name: 'hkjc.txt', type: 'file', fileType: 'text', file: new HKJCFile() },
-                { name: 'tnt-supermarket.txt', type: 'file', fileType: 'text', file: new TnTSupermarketFile() },
-            ],
-        },
-        {
-            name: 'logs',
-            type: 'folder',
-            children: []
-        }
-    ]
-};
+let directoryTree: FolderNode;
 
 export class DirectoryService {
+    static async init() {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const mapData = (data: any): FileNode | FolderNode => {
+            if (data.type === 'file') {
+                const fileNode: FileNode = {
+                    path: data.path,
+                    name: data.name,
+                    type: 'file',
+                    extension: data.extension,
+                };
+                return fileNode;
+            } else if (data.type === 'directory') {
+                const folderNode: FolderNode = {
+                    path: data.path,
+                    name: data.name,
+                    type: 'directory',
+                    children: data.children.map(mapData),
+                };
+                return folderNode;
+            }
+            throw new Error(`Unknown type: ${data.type}`);
+        };
+
+        const directoryJson = await fetch('/directory.json').then((res) => res.json());
+        const mappedData = mapData(directoryJson) as FolderNode;
+        directoryTree = mappedData;
+    }
+
     public static getFoldersAndFiles(path: string): Array<FileNode | FolderNode> {
         const pathArray = path.split('/').filter((path) => path !== '');
         let currentDirectory = directoryTree;
@@ -58,7 +62,7 @@ export class DirectoryService {
 
         const directory = this.getFoldersAndFiles(pathArray.join('/'));
         const file = directory.find((child) => child.name === filename);
-        if (file === undefined || file.type === 'folder') {
+        if (file === undefined || file.type === 'directory') {
             return null;
         }
 

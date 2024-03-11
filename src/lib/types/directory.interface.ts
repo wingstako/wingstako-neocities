@@ -1,16 +1,13 @@
-export interface IFile {
-    content: string;
-}
-
 export interface FileNode {
+    path: string;
     name: string;
     type: 'file';
-    fileType: 'text' | 'image';
-    file: IFile;
+    extension: string;
 }
 
 export interface FolderNode {
+    path: string
     name: string;
-    type: 'folder';
+    type: 'directory';
     children: Array<FileNode | FolderNode>;
 }
