@@ -1,3 +1,7 @@
 import { DirectoryService } from "$lib/directory.service";
 
-await DirectoryService.init();
+async function init() {
+    await DirectoryService.init();
+}
+
+init();
