@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import dirTree from 'directory-tree';
 
-const tree = dirTree("static/directory", { attributes: ['type', 'extension', 'mode', 'mtime'] });
+const tree = dirTree('static/directory', { attributes: ['type', 'extension', 'mode', 'mtime'] });
 
 // loop all nodes in the tree and remove `static/ or static\` from the path
 function removeStaticFromPath(node) {

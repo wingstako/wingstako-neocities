@@ -2,7 +2,7 @@
  * @deprecated
  */
 export class WorldlineFile {
-    content: string = `
+  content: string = `
     <pre>                                                                                
                      ////                                           
                //    /////        ///                               

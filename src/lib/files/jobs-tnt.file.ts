@@ -2,7 +2,7 @@
  * @deprecated
  */
 export class TnTSupermarketFile {
-    content: string = `
+  content: string = `
     <pre>                                                                                                                                                        
 *+++++++++++++++++++++++        *++++++++        ++++++++++++++++++++++++   
 +++++   *+++++++   *++++*     ++++    +++++      +++++    +++++++   *++++*  

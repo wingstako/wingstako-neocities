@@ -1,7 +1,7 @@
-import { DirectoryService } from "$lib/directory.service";
+import { DirectoryService } from '$lib/directory.service';
 
 async function init() {
-    await DirectoryService.init();
+  await DirectoryService.init();
 }
 
 init();
