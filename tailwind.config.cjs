@@ -1,15 +1,15 @@
 const config = {
-	content: ['./src/**/*.{html,js,svelte,ts}'],
+  content: ['./src/**/*.{html,js,svelte,ts}'],
 
-	theme: {
-		extend: {
-			colors: {
-				'bocchi-pink': '#FAB1CB'
-			}
-		}
-	},
+  theme: {
+    extend: {
+      colors: {
+        'bocchi-pink': '#FAB1CB'
+      }
+    }
+  },
 
-	plugins: []
+  plugins: []
 };
 
 module.exports = config;

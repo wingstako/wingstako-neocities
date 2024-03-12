@@ -1,4 +1,4 @@
-import type {  IAsyncCommand, ICommand, IInteractiveCommand } from '$lib/types/command.interface';
+import type { IAsyncCommand, ICommand, IInteractiveCommand } from '$lib/types/command.interface';
 import { writable } from 'svelte/store';
 
 export const commandHistoryStore = writable<string[]>([]);

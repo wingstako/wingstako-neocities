@@ -3,12 +3,12 @@ import { createTerminalMessage } from '$lib/uitls';
 import type { ICommand } from '../../types/command.interface';
 
 export class EchoCommand implements ICommand {
-	execute(args: string[]): void {
-		const message = createTerminalMessage({
-			message: args.join(' ') + '<br><br>',
-			html: true,
-		});
+  execute(args: string[]): void {
+    const message = createTerminalMessage({
+      message: args.join(' ') + '<br><br>',
+      html: true
+    });
 
-		displayStore.update((display) => display.concat(message));
-	}
+    displayStore.update((display) => display.concat(message));
+  }
 }

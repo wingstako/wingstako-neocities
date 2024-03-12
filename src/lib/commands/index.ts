@@ -10,14 +10,14 @@ import { WingstakoCommand } from './wingstako';
 import { BocchiCommand } from './bocchi';
 
 export {
-    CatCommand,
-    CdCommand,
-    ClearCommand,
-    CurlCommand,
-    EchoCommand,
-    HelpCommand,
-    LsCommand,
-    PingCommand,
-    WingstakoCommand,
-    BocchiCommand
-}
+  CatCommand,
+  CdCommand,
+  ClearCommand,
+  CurlCommand,
+  EchoCommand,
+  HelpCommand,
+  LsCommand,
+  PingCommand,
+  WingstakoCommand,
+  BocchiCommand
+};

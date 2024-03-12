@@ -1,0 +1,14 @@
+pnpm lint || (
+    echo "Linting failed, please fix the errors before committing";
+    false;
+)
+
+echo "Pre-commit checks passed"
+
+pnpm build || (
+    echo "Build failed, please fix the errors before committing";
+    false;
+)
+
+echo "Build passed"
+

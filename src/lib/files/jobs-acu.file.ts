@@ -2,7 +2,7 @@
  * @deprecated
  */
 export class ACUFile {
-    content: string = `
+  content: string = `
     <pre>                                                                                
 title: Software Developer
 company: ACU Holdings Limited

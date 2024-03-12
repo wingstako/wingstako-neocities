@@ -2,7 +2,7 @@
  * @deprecated
  */
 export class HKJCFile {
-    content: string = `
+  content: string = `
     <pre>                                                                                
 title: Trainee
 company: Hong Kong Jockey Club
