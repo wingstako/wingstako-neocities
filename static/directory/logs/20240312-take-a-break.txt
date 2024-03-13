@@ -1,0 +1,7 @@
+Sometimes when you get stuck on a question, all you need to do is take a break.
+
+Take the directory system of this website as an example. I thought it would be easy for a website to read physical files and directories with the 'fs' module. But it turns out, it is not suitable for a static hosting site like Neocities. So, I am stuck. I don't know what to do next. And you can see from the git history, I hard-coded the file into TypeScript files and just left it as it is.
+
+Later, I started working on the 'curl' command. I used the 'fetch' API to mimic 'ping' in the terminal. Suddenly, an idea popped up in my mind that told me I could use fetch for fetching local files. And later, the whole directory was rebuilt using the fetch API.
+
+Here's the takeaway: don't focus on something you cannot fix or deal with at that moment. Eventually, you will find a solution for it.
