@@ -19,5 +19,8 @@ module.exports = {
   },
   globals: {
     TERMINAL: 'writable'
+  },
+  rules: {
+    'linebreak-style': ['error', 'unix']
   }
 };

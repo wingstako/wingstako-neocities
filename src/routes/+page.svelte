@@ -8,6 +8,7 @@
   } from '$lib/stores/terminal-store';
   import { onMount } from 'svelte';
   import { createTerminalMessage } from '$lib/uitls';
+  import { AutoCompleteService } from '$lib/auto-complete.service';
 
   let commandPrefix = 'guest@wingstako.terminal ';
 
@@ -22,7 +23,7 @@
   const commandProcessor = CommandProcessor.getInstance();
 
   const onKeyDown = (e: KeyboardEvent) => {
-    inputField.focus();
+    if (inputField) inputField.focus();
     if (e.key === 'ArrowUp') {
       command = $commandHistoryStore[commandHistoryIndex];
       if (commandHistoryIndex > 0) {
@@ -48,9 +49,13 @@
       commandHistoryIndex = $commandHistoryStore.length - 1;
       commandProcessor.process(command);
       command = '';
-      inputField.focus();
+      if (inputField) inputField.focus();
     } else if (e.key === 'Tab') {
       e.preventDefault();
+      const suggestion = AutoCompleteService.getNextCompletion($directoryStore.join('/'), command);
+      if (suggestion) {
+        command = suggestion;
+      }
     }
   };
 
@@ -66,6 +71,8 @@
     inputField.style.height = 'auto';
     inputField.style.height = inputField.scrollHeight + 'px';
   }
+
+  $: $directoryStore;
 
   $: $displayStore, scrollToBottom();
 
@@ -86,7 +93,7 @@
     displayStore.update((value) => value.concat(init_msg));
 
     const handleGlobalKeydown = () => {
-      inputField.focus();
+      if (inputField) inputField.focus();
     };
     window.addEventListener('keydown', handleGlobalKeydown);
 
