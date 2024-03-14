@@ -17,11 +17,15 @@ export class CatCommand implements IAsyncCommand {
     }
 
     const content = await fetch(fileNode.path.replace('static\\', '')).then((res) => res.text());
-    const message = createTerminalMessage({
-      message: content,
-      html: false
-    });
 
-    displayStore.update((display) => display.concat(message));
+    const lines = content.split('\n');
+
+    for (const line of lines) {
+      const message = createTerminalMessage({
+        message: line,
+        html: false
+      });
+      displayStore.update((display) => display.concat(message));
+    }
   }
 }
