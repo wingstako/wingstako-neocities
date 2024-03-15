@@ -1,38 +1,34 @@
-# create-svelte
+<br>
+<div align="center">
+<a href="https://github.com/wingstako/wingstako-neocities">
+<img src="https://raw.githubusercontent.com/wingstako/wingstako-neocities/main/wingstako-neocities.png" alt="wingstako-neocities-banner" /></a>
+</div>
+<br />
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+<p align="center"> A Terminal like website. </p> 
+<p align="center">
+<a href="https://wingstako.neocities.org">🚀 Live</a>
 
-## Creating a project
+## ⚡️ Usage
 
-If you're seeing this, you've probably already done this step. Congrats!
+### Developing
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Start a development server:
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+pnpm dev
 ```
 
-## Building
+### Building
 
-To create a production version of your app:
+Create a production version of ur blog:
 
 ```bash
-npm run build
+pnpm build
 ```
 
-You can preview the production build with `npm run preview`.
+Preview the built app with `pnpm preview`.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
+<hr>
+This project is still under active development. Feel free to leave suggestions or contributions!
