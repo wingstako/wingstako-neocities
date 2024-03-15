@@ -29,6 +29,5 @@ pnpm build
 
 Preview the built app with `pnpm preview`.
 
-
 <hr>
 This project is still under active development. Feel free to leave suggestions or contributions!

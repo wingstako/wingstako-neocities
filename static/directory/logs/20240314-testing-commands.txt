@@ -1,0 +1,31 @@
+1. Caused by inconsistent queue configuration
+```
+  [Nest] 43832  - 07/14/2023, 4:02:13 PM   ERROR [ClientProxy] Disconnected from RMQ. Trying to reconnect.
+  [Nest] 43832  - 07/14/2023, 4:02:13 PM   ERROR [ClientProxy] Object:
+  {
+    "err": {
+      "code": "ERR_UNHANDLED_ERROR",
+      "context": {
+        "code": 406,
+        "classId": 50,
+        "methodId": 10
+      }
+    }
+  }
+```
+
+2. Caused by channel closed ??? 有可能Send錯Queue
+```
+[Nest] 30428  - 07/14/2023, 3:06:39 PM   ERROR [Server] Disconnected from RMQ. Trying to reconnect.
+[Nest] 30428  - 07/14/2023, 3:06:39 PM   ERROR [Server] Object:
+{
+  "err": {
+    "code": "ERR_UNHANDLED_ERROR",
+    "context": {
+      "code": 406,
+      "classId": 60,
+      "methodId": 80
+    }
+  }
+}
+```
