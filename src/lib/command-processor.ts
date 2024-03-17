@@ -4,7 +4,6 @@ import {
   runningCommandStore
 } from '$lib/stores/terminal-store';
 import { handle } from './error-handler';
-import { HelpCommand } from './commands/help';
 import type { IAsyncCommand, ICommand, IInteractiveCommand } from './types/command.interface';
 import { get } from 'svelte/store';
 import {
@@ -14,11 +13,14 @@ import {
   ClearCommand,
   CurlCommand,
   EchoCommand,
+  HeadCommand,
+  HelpCommand,
   LsCommand,
   PingCommand,
+  PwdCommand,
+  TailCommand,
   WingstakoCommand
 } from './commands';
-import { TailCommand } from './commands/tail';
 
 const COMMAND_REGISTRY: { [command: string]: ICommand | IAsyncCommand | IInteractiveCommand } = {
   help: new HelpCommand(),
@@ -31,6 +33,8 @@ const COMMAND_REGISTRY: { [command: string]: ICommand | IAsyncCommand | IInterac
   ls: new LsCommand(),
   cat: new CatCommand(),
   ping: new PingCommand(),
+  pwd: new PwdCommand(),
+  head: new HeadCommand(),
   tail: new TailCommand()
 };
 
