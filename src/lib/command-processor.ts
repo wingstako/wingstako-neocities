@@ -18,6 +18,7 @@ import {
   PingCommand,
   WingstakoCommand
 } from './commands';
+import { TailCommand } from './commands/tail';
 
 const COMMAND_REGISTRY: { [command: string]: ICommand | IAsyncCommand | IInteractiveCommand } = {
   help: new HelpCommand(),
@@ -29,7 +30,8 @@ const COMMAND_REGISTRY: { [command: string]: ICommand | IAsyncCommand | IInterac
   curl: new CurlCommand(),
   ls: new LsCommand(),
   cat: new CatCommand(),
-  ping: new PingCommand()
+  ping: new PingCommand(),
+  tail: new TailCommand()
 };
 
 export class CommandProcessor {
