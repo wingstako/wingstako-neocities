@@ -14,7 +14,11 @@ export class HelpCommand implements ICommand {
       { name: 'curl', desription: '[url]' },
       { name: 'cat', desription: '[file]' },
       { name: 'ping', desription: '[domain]' },
-      { name: 'ls', desription: '' }
+      { name: 'ls', desription: '' },
+      { name: 'head', desription: '' },
+      { name: 'tail', desription: '' },
+      { name: 'pwd', desription: '' },
+      
     ];
 
     //sort by name alphabetically

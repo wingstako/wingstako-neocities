@@ -8,6 +8,9 @@ import { LsCommand } from './ls';
 import { PingCommand } from './ping';
 import { WingstakoCommand } from './wingstako';
 import { BocchiCommand } from './bocchi';
+import { HeadCommand } from './head';
+import { TailCommand } from './tail';
+import { PwdCommand } from './pwd';
 
 export {
   CatCommand,
@@ -19,5 +22,8 @@ export {
   LsCommand,
   PingCommand,
   WingstakoCommand,
-  BocchiCommand
+  BocchiCommand,
+  HeadCommand,
+  TailCommand,
+  PwdCommand,
 };
