@@ -7,12 +7,12 @@ interface createTerminalMessageOptions {
 }
 
 export const createTerminalMessage = (
-  options: createTerminalMessageOptions
+  options: createTerminalMessageOptions,
 ): TERMINAL.TerminalMessage => {
   return {
     id: v4(),
     message: options.message,
     html: options.html,
-    color: options.color
+    color: options.color,
   };
 };

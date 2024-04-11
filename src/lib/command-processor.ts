@@ -1,7 +1,7 @@
 import {
   displayStore,
   interactiveCommandStore,
-  runningCommandStore
+  runningCommandStore,
 } from '$lib/stores/terminal-store';
 import { handle } from './error-handler';
 import type { IAsyncCommand, ICommand, IInteractiveCommand } from './types/command.interface';
@@ -19,7 +19,7 @@ import {
   PingCommand,
   PwdCommand,
   TailCommand,
-  WingstakoCommand
+  WingstakoCommand,
 } from './commands';
 
 const COMMAND_REGISTRY: { [command: string]: ICommand | IAsyncCommand | IInteractiveCommand } = {
@@ -35,7 +35,7 @@ const COMMAND_REGISTRY: { [command: string]: ICommand | IAsyncCommand | IInterac
   ping: new PingCommand(),
   pwd: new PwdCommand(),
   head: new HeadCommand(),
-  tail: new TailCommand()
+  tail: new TailCommand(),
 };
 
 export class CommandProcessor {

@@ -13,7 +13,7 @@ export class TailCommand implements IAsyncCommand {
 
     if (fileNode === null || fileNode === undefined) {
       const message = createTerminalMessage({
-        message: `cat: ${args[0]}: No such file`
+        message: `cat: ${args[0]}: No such file`,
       });
       displayStore.update((display) => display.concat(message));
       return;
@@ -26,7 +26,7 @@ export class TailCommand implements IAsyncCommand {
     for (const line of lines) {
       const message = createTerminalMessage({
         message: line,
-        html: false
+        html: false,
       });
       displayStore.update((display) => display.concat(message));
     }

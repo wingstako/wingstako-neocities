@@ -17,7 +17,7 @@ export class HelpCommand implements ICommand {
       { name: 'ls', desription: '' },
       { name: 'head', desription: '' },
       { name: 'tail', desription: '' },
-      { name: 'pwd', desription: '' }
+      { name: 'pwd', desription: '' },
     ];
 
     //sort by name alphabetically
@@ -34,7 +34,7 @@ export class HelpCommand implements ICommand {
 
     const message = createTerminalMessage({
       message: output,
-      html: true
+      html: true,
     });
 
     displayStore.update((display) => display.concat(message));

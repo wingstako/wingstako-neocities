@@ -25,5 +25,5 @@ export {
   BocchiCommand,
   HeadCommand,
   TailCommand,
-  PwdCommand
+  PwdCommand,
 };

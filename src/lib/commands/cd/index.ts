@@ -29,7 +29,7 @@ export class CdCommand implements ICommand {
         const folderNode = DirectoryService.getFolder(path);
         if (folderNode === null || folderNode === undefined) {
           const message = createTerminalMessage({
-            message: `cd: ${args[0]}: No such directory`
+            message: `cd: ${args[0]}: No such directory`,
           });
           displayStore.update((display) => display.concat(message));
           return;

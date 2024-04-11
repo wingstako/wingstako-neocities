@@ -4,7 +4,7 @@
     displayStore,
     commandHistoryStore,
     directoryStore,
-    runningCommandStore
+    runningCommandStore,
   } from '$lib/stores/terminal-store';
   import { onMount } from 'svelte';
   import { createTerminalMessage } from '$lib/uitls';
@@ -42,7 +42,7 @@
 					<span style="color:#FFFF00;">${displayedDirectory}</span> 
 					<br>$ <span>${command}</span>
 					</p>`,
-        html: true
+        html: true,
       });
       displayStore.update((value) => value.concat(enteredCommand));
       commandHistoryStore.update((value) => value.concat(command));
@@ -87,7 +87,7 @@
     Welcome traveler, <br>
     Please enter "help" to check available commands.
     `,
-      html: true
+      html: true,
     });
 
     displayStore.update((value) => value.concat(init_msg));

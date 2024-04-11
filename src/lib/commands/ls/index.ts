@@ -17,13 +17,13 @@ export class LsCommand implements ICommand {
       .map((item) =>
         item.type === 'directory'
           ? `<span style="color:lightblue">${item.name}/</span>`
-          : `<span style="color:lightgreen">${item.name}</span>`
+          : `<span style="color:lightgreen">${item.name}</span>`,
       )
       .join('&nbsp;&nbsp;&nbsp;&nbsp;');
 
     const message = createTerminalMessage({
       message: output,
-      html: true
+      html: true,
     });
     displayStore.update((display) => display.concat(message));
   }

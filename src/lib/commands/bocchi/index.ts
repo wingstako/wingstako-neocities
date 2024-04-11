@@ -60,7 +60,7 @@ export class BocchiCommand implements ICommand {
 
             `,
       html: true,
-      color: '#FFFFFF'
+      color: '#FFFFFF',
     });
 
     displayStore.update((display) => display.concat(message));

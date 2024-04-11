@@ -13,7 +13,7 @@ export class DirectoryService {
           path: data.path,
           name: data.name,
           type: 'file',
-          extension: data.extension
+          extension: data.extension,
         };
         return fileNode;
       } else if (data.type === 'directory') {
@@ -21,7 +21,7 @@ export class DirectoryService {
           path: data.path,
           name: data.name,
           type: 'directory',
-          children: data.children.map(mapData)
+          children: data.children.map(mapData),
         };
         return folderNode;
       }

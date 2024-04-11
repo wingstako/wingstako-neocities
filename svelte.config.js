@@ -7,13 +7,13 @@ const config = {
   // for more information about preprocessors
   preprocess: [
     preprocess({
-      postcss: true
-    })
+      postcss: true,
+    }),
   ],
   kit: {
-    adapter: adapterStatic({ pages: 'build', assets: 'build', fallback: 'index.html' })
+    adapter: adapterStatic({ pages: 'build', assets: 'build', fallback: 'index.html' }),
   },
-  vitePlugin: []
+  vitePlugin: [],
 };
 
 export default config;

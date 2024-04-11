@@ -21,7 +21,7 @@ GitHub Repository: https://github.com/wingstsako/wingstako-neocities</a>
             </pre>
             `,
       html: true,
-      color: '#FFFFFF'
+      color: '#FFFFFF',
     });
 
     displayStore.update((display) => display.concat(message));

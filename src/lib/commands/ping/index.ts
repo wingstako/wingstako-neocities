@@ -6,7 +6,7 @@ export class PingCommand implements IAsyncCommand {
   async execute(args: string[]): Promise<void> {
     if (args[0] === undefined || args[0] === '') {
       const message = createTerminalMessage({
-        message: 'ping: missing parameter'
+        message: 'ping: missing parameter',
       });
       displayStore.update((display) => display.concat(message));
       return Promise.resolve();
@@ -17,7 +17,7 @@ export class PingCommand implements IAsyncCommand {
     let ip = '';
     if (ipResponse.status === 'NO_RECORDS' || ipResponse.status === 'INVALID_HOST') {
       const message = createTerminalMessage({
-        message: `ping: ${url}: Name or service not known`
+        message: `ping: ${url}: Name or service not known`,
       });
       displayStore.update((display) => display.concat(message));
       return Promise.resolve();
@@ -28,9 +28,9 @@ export class PingCommand implements IAsyncCommand {
     displayStore.update((display) =>
       display.concat(
         createTerminalMessage({
-          message: `Pinging ${url} [${ip}]...`
-        })
-      )
+          message: `Pinging ${url} [${ip}]...`,
+        }),
+      ),
     );
 
     let success = 0,
@@ -45,14 +45,14 @@ export class PingCommand implements IAsyncCommand {
         const ms = end - start;
 
         const message = createTerminalMessage({
-          message: `Reply from ${ip}: time=${ms}ms`
+          message: `Reply from ${ip}: time=${ms}ms`,
         });
         displayStore.update((display) => display.concat(message));
         success++;
       } catch (e) {
         fail++;
         const message = createTerminalMessage({
-          message: `Request timed out`
+          message: `Request timed out`,
         });
         displayStore.update((display) => display.concat(message));
       } finally {
@@ -68,9 +68,9 @@ Ping statistics for ${ip}:
     Packets: Sent = ${fail + success}, Received = ${success}, Lost = ${fail} (${
       (fail / (fail + success)) * 100
     }% loss)</pre>`,
-          html: true
-        })
-      )
+          html: true,
+        }),
+      ),
     );
 
     return Promise.resolve();

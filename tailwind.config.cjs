@@ -4,12 +4,12 @@ const config = {
   theme: {
     extend: {
       colors: {
-        'bocchi-pink': '#FAB1CB'
-      }
-    }
+        'bocchi-pink': '#FAB1CB',
+      },
+    },
   },
 
-  plugins: []
+  plugins: [],
 };
 
 module.exports = config;

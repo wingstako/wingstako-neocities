@@ -7,7 +7,7 @@ export class PwdCommand implements ICommand {
   execute(): void {
     const currentPath = get(directoryStore);
     const message = createTerminalMessage({
-      message: currentPath.join('/')
+      message: currentPath.join('/'),
     });
     displayStore.update((display) => display.concat(message));
   }

@@ -7,7 +7,7 @@ export class CurlCommand implements ICommand {
     if (args[0] === undefined || args.length === 0) {
       const message = createTerminalMessage({
         message: '(づ ◕‿◕ )づ <span class="hidden-element">What do you expect</span>',
-        html: true
+        html: true,
       });
       displayStore.update((display) => display.concat(message));
       return;
@@ -16,7 +16,7 @@ export class CurlCommand implements ICommand {
     if (args[0].endsWith('.png') || args[0].endsWith('.jpg')) {
       const message = createTerminalMessage({
         message: `<img src="${args[0]}" alt="${args[0]}">`,
-        html: true
+        html: true,
       });
       displayStore.update((display) => display.concat(message));
       return;
@@ -54,14 +54,14 @@ export class CurlCommand implements ICommand {
         }
         const message = createTerminalMessage({
           message: formattedText,
-          html: contentType === 'text/plain' ? true : false
+          html: contentType === 'text/plain' ? true : false,
         });
         displayStore.update((display) => display.concat(message));
       })
       .catch((error) => {
         const message = createTerminalMessage({
           message: error,
-          html: true
+          html: true,
         });
         displayStore.update((display) => display.concat(message));
       });
