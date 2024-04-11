@@ -17,8 +17,7 @@ export class HelpCommand implements ICommand {
       { name: 'ls', desription: '' },
       { name: 'head', desription: '' },
       { name: 'tail', desription: '' },
-      { name: 'pwd', desription: '' },
-      
+      { name: 'pwd', desription: '' }
     ];
 
     //sort by name alphabetically
