@@ -5,6 +5,7 @@ import type { IAsyncCommand } from '../../types/command.interface';
 
 export class TailCommand implements IAsyncCommand {
   async execute(args: string[]): Promise<void> {
+    // eslint-disable-next-line prefer-const -- This is a placeholder for future use
     let size = 5;
 
     // args[0] is the file name

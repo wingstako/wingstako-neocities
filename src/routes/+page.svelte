@@ -112,7 +112,7 @@
         {#if value.html}
           {@html value.message}
         {:else}
-          <div style="color: {value.color};">{value.message}</div>
+          <div style="color: {value.color}; white-space: pre-wrap;">{value.message}</div>
         {/if}
       {/each}
 
