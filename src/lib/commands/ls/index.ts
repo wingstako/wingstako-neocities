@@ -5,7 +5,9 @@ import type { ICommand } from '../../types/command.interface';
 import { get } from 'svelte/store';
 
 export class LsCommand implements ICommand {
-  execute(): void {
+  execute(args: string[]): void {
+    const showHidden = args.includes('-a');
+
     const currentDirectory = get(directoryStore).join('/');
     const directory = DirectoryService.getFoldersAndFiles(currentDirectory);
     if (directory === undefined) {
@@ -14,6 +16,7 @@ export class LsCommand implements ICommand {
     directory.sort((a, b) => a.name.localeCompare(b.name));
 
     const output = directory
+      .filter((item) => showHidden || !item.isHidden)
       .map((item) =>
         item.type === 'directory'
           ? `<span style="color:lightblue">${item.name}/</span>`

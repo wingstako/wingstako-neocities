@@ -8,12 +8,14 @@ export class DirectoryService {
   static async init() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const mapData = (data: any): FileNode | FolderNode => {
+      const isHidden = data.name.startsWith('.');
       if (data.type === 'file') {
         const fileNode: FileNode = {
           path: data.path,
           name: data.name,
           type: 'file',
           extension: data.extension,
+          isHidden: isHidden,
         };
         return fileNode;
       } else if (data.type === 'directory') {
@@ -22,6 +24,7 @@ export class DirectoryService {
           name: data.name,
           type: 'directory',
           children: data.children.map(mapData),
+          isHidden: isHidden,
         };
         return folderNode;
       }
