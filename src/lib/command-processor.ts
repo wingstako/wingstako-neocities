@@ -3,7 +3,7 @@ import {
   interactiveCommandStore,
   runningCommandStore,
 } from '$lib/stores/terminal-store';
-import { handle } from './error-handler';
+import { handleUnexpectedError, handleUnknownCommand } from './error-handler';
 import type { IAsyncCommand, ICommand, IInteractiveCommand } from './types/command.interface';
 import { get } from 'svelte/store';
 import {
@@ -54,24 +54,28 @@ export class CommandProcessor {
   }
 
   public async process(input: string) {
-    const interactiveCommand = get(interactiveCommandStore);
-    if (interactiveCommand != null && interactiveCommand != undefined) {
-      interactiveCommand.update(input);
-      return;
+    try {
+      const interactiveCommand = get(interactiveCommandStore);
+      if (interactiveCommand != null && interactiveCommand != undefined) {
+        interactiveCommand.update(input);
+        return;
+      }
+
+      const [commandName, ...args] = input.split(' ');
+      const command = COMMAND_REGISTRY[commandName.toLowerCase()];
+
+      if (!command) {
+        displayStore.update((display) => display.concat(handleUnknownCommand(input)));
+        return;
+      }
+
+      runningCommandStore.set(command);
+
+      await command.execute(args);
+    } catch (error) {
+      displayStore.update((display) => display.concat(handleUnexpectedError(error as Error)));
+    } finally {
+      runningCommandStore.set(null);
     }
-
-    const [commandName, ...args] = input.split(' ');
-    const command = COMMAND_REGISTRY[commandName.toLowerCase()];
-
-    if (!command) {
-      displayStore.update((display) => display.concat(handle(input)));
-      return;
-    }
-
-    runningCommandStore.set(command);
-
-    await command.execute(args);
-
-    runningCommandStore.set(null);
   }
 }
