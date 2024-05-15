@@ -19,6 +19,7 @@ import {
   PingCommand,
   PwdCommand,
   TailCommand,
+  TakoCommand,
   WingstakoCommand,
 } from './commands';
 
@@ -36,6 +37,7 @@ const COMMAND_REGISTRY: { [command: string]: ICommand | IAsyncCommand | IInterac
   pwd: new PwdCommand(),
   head: new HeadCommand(),
   tail: new TailCommand(),
+  tako: new TakoCommand(),
 };
 
 export class CommandProcessor {
