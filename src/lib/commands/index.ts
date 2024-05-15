@@ -11,6 +11,7 @@ import { BocchiCommand } from './bocchi';
 import { HeadCommand } from './head';
 import { TailCommand } from './tail';
 import { PwdCommand } from './pwd';
+import { TakoCommand } from './tako';
 
 export {
   CatCommand,
@@ -26,4 +27,5 @@ export {
   HeadCommand,
   TailCommand,
   PwdCommand,
+  TakoCommand,
 };

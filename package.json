@@ -55,6 +55,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@mlc-ai/web-llm": "^0.2.35",
     "uuid": "^9.0.1"
   }
 }

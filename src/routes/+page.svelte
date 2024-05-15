@@ -5,10 +5,12 @@
     commandHistoryStore,
     directoryStore,
     runningCommandStore,
+    updateDisplayStore,
   } from '$lib/stores/terminal-store';
   import { onMount } from 'svelte';
   import { createTerminalMessage } from '$lib/uitls';
   import { AutoCompleteService } from '$lib/auto-complete.service';
+  import { v4 } from 'uuid';
 
   let commandPrefix = 'guest@wingstako.terminal ';
 
@@ -82,15 +84,6 @@
 
   onMount(() => {
     adjustHeight();
-    const init_msg: TERMINAL.TerminalMessage = createTerminalMessage({
-      message: `
-    Welcome traveler, <br>
-    Please enter "help" to check available commands.
-    `,
-      html: true,
-    });
-
-    displayStore.update((value) => value.concat(init_msg));
 
     const handleGlobalKeydown = () => {
       if (inputField) inputField.focus();
@@ -101,6 +94,17 @@
       window.removeEventListener('keydown', handleGlobalKeydown);
     };
   });
+
+  const init_msg: TERMINAL.TerminalMessage = createTerminalMessage({
+    id: v4(),
+    message: `
+    Welcome traveler, <br>
+    Please enter "help" to check available commands.
+    `,
+    html: true,
+  });
+
+  updateDisplayStore(init_msg);
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
