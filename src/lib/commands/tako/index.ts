@@ -7,11 +7,13 @@ import {
   type InitProgressReport,
   CreateEngine,
   type ChatCompletionRequest,
+  type ChatCompletionMessageParam,
 } from '@mlc-ai/web-llm';
 
 export class TakoCommand implements IAsyncCommand {
   private selectedModel = 'Llama-3-8B-Instruct-q4f32_1';
   private engine: EngineInterface | null = null;
+  private chatHistory: ChatCompletionMessageParam[] = [];
 
   private COMMAND_REGISTRY: { [command: string]: (args: string[]) => Promise<void> | void } = {
     init: this.handleInit.bind(this),
@@ -24,11 +26,8 @@ export class TakoCommand implements IAsyncCommand {
     if (command) {
       await command(args.slice(1));
     } else {
-      // handle unknown command
       this.sendErrorMessage(`Unknown tako command: ${args[0]}`);
     }
-
-    // await this.init();
   }
 
   async handleInit(): Promise<void> {
@@ -72,9 +71,11 @@ export class TakoCommand implements IAsyncCommand {
       return;
     }
 
+    this.chatHistory.push({ role: 'user', content: question });
+
     const chatRequest: ChatCompletionRequest = {
       stream: true,
-      messages: [{ role: 'user', content: question }],
+      messages: this.chatHistory,
       logprobs: true,
       top_logprobs: 2,
     };
@@ -83,22 +84,24 @@ export class TakoCommand implements IAsyncCommand {
 
     let replyMessage = '';
 
-    let message: TERMINAL.TerminalMessage = createTerminalMessage({
+    const message: TERMINAL.TerminalMessage = createTerminalMessage({
       id: v4(),
       message: replyMessage,
     });
 
     for await (const chunk of replyChunks) {
-      console.log(chunk);
       if (chunk.choices[0].delta.content) {
         replyMessage += chunk.choices[0].delta.content;
       }
       (message.message = replyMessage), updateDisplayStore(message);
     }
+
+    this.chatHistory.push({ role: 'assistant', content: replyMessage });
   }
 
   handleReset(): void {
     this.engine = null;
+    this.chatHistory = [];
   }
 
   sendErrorMessage(message: string): void {
